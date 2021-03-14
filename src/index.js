@@ -7,11 +7,19 @@ import { showMessage } from "./showMessage.js";
 (async function() {
   //make the AJAX call and fetch quiz data and messages to display at the end
 
-  let response = await fetch("http://proto.io/en/jobs/candidate-questions/quiz.json");
-  response = await response.json();
-  let messages = await fetch("https://proto.io/en/jobs/candidate-questions/result.json");
-  messages = await messages.json();
-  messages = messages.results;
+let response;
+let messages;
+  try {
+     response = await fetch("http://proto.io/en/jobs/candidate-questions/quiz.json");
+    response = await response.json();
+     messages = await fetch("https://proto.io/en/jobs/candidate-questions/result.json");
+    messages = await messages.json();
+    messages = messages.results;
+  } catch (e) {
+      console.log("Something went wrong: ",e.name);
+
+  }
+
 
   let quizQuestions = response.questions;
 
